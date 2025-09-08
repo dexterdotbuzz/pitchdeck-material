@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5-Year Growth Forecast | The Pre-Seed Opportunity</title>
+    
+    <!-- Chart.js and Annotation Plugin from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@1.4.0/dist/chartjs-plugin-annotation.min.js"></script>
+
+    <!-- Google Fonts for a modern look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+            color: #333;
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 2rem 3rem;
+            width: 100%;
+            max-width: 1200px;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2.5rem;
+            align-items: center;
+        }
+        .chart-wrapper {
+            height: 500px;
+        }
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1a202c;
+            margin: 0;
+            line-height: 1.2;
+        }
+        .subtitle {
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: #4a5568;
+            margin-top: 0.5rem;
+            margin-bottom: 2rem;
+        }
+        .narrative-section h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #2d3748;
+            border-bottom: 2px solid #4299e1;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .narrative-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .narrative-section li {
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+        .narrative-section strong {
+            font-weight: 600;
+            color: #2c5282;
+        }
+        .narrative-section .highlight {
+            background-color: rgba(66, 153, 225, 0.1);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            body {
+                height: auto;
+                padding: 2rem 1rem;
+            }
+            .container {
+                grid-template-columns: 1fr;
+                padding: 2rem;
+            }
+            .chart-wrapper {
+                height: 400px;
+            }
+             h1 {
+                font-size: 2rem;
+            }
+            .subtitle {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="main-content">
+            <h1>The Path to $24M ARR</h1>
+            <p class="subtitle">Executing a Proven US Playbook in the Untapped Asian Market</p>
+            <div class="chart-wrapper">
+                <canvas id="growthChart"></canvas>
+            </div>
+        </div>
+        <div class="narrative-section">
+            <h2>The Pre-Seed Story</h2>
+            <ul>
+                <li><strong>The Opportunity:</strong> A highly profitable SaaS + tangible good model is working in the US. We've identified a <span class="highlight"><strong>massive blue ocean opportunity</strong></span> in Asia, where relationship marketing is deeply valued but this model doesn't exist.</li>
+                <li><strong>The Catalyst (Your $300k):</strong> funds the two engines of our growth: a repeatable sales playbook and our <span class="highlight"><strong>proprietary automation hardware</strong></span>  for scalable, high-margin fulfillment.</li>
+                <li><strong>The Scale (The Vision):</strong> With the Asian playbook proven, we raise Seed & Series A rounds to scale aggressively, becoming the market leader and achieving a best-in-class **75% SaaS margin.**</li>
+            </ul>
+        </div>
+    </div>
+
+<script>
+    const data = {
+        labels: ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5'],
+        clients: [20, 100, 400, 1500, 5000],
+        revenue: [24000, 180000, 960000, 5400000, 24000000],
+        margin: [35, 50, 60, 70, 75]
+    };
+
+    const config = {
+        type: 'bar',
+        data: {
+            labels: data.labels,
+            datasets: [
+                {
+                    label: 'Annual Revenue (ARR)',
+                    data: data.revenue,
+                    backgroundColor: 'rgba(66, 153, 225, 0.75)',
+                    borderColor: 'rgba(66, 153, 225, 1)',
+                    borderWidth: 1,
+                    yAxisID: 'yRevenue',
+                    order: 2 
+                },
+                {
+                    label: 'Gross Margin',
+                    data: data.margin,
+                    type: 'line',
+                    borderColor: '#38A169',
+                    backgroundColor: 'rgba(56, 161, 105, 0.1)',
+                    borderWidth: 3,
+                    pointBackgroundColor: '#38A169',
+                    pointRadius: 5,
+                    fill: true,
+                    tension: 0.4,
+                    yAxisID: 'yMargin',
+                    order: 1 
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: {
+                mode: 'index',
+                intersect: false,
+            },
+            plugins: {
+                tooltip: {
+                    backgroundColor: '#1a202c',
+                    titleFont: { size: 16, weight: 'bold' },
+                    bodyFont: { size: 14 },
+                    padding: 15,
+                    cornerRadius: 8,
+                    callbacks: {
+                        label: function(context) {
+                            let label = context.dataset.label || '';
+                            if (label) {
+                                label += ': ';
+                            }
+                            if (context.dataset.yAxisID === 'yMargin') {
+                                label += context.parsed.y + '%';
+                            } else {
+                                label += '$' + new Intl.NumberFormat('en-US', { notation: 'compact', compactDisplay: 'short' }).format(context.parsed.y);
+                            }
+                            return label;
+                        },
+                        afterBody: function(tooltipItems) {
+                             const index = tooltipItems[0].dataIndex;
+                             return '\nClients: ' + new Intl.NumberFormat().format(data.clients[index]);
+                        }
+                    }
+                },
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        font: { size: 14 },
+                        padding: 20
+                    }
+                },
+                annotation: {
+                    annotations: {
+                        line1: {
+                            type: 'line',
+                            xMin: 0.5,
+                            xMax: 0.5,
+                            borderColor: 'rgba(229, 62, 62, 0.8)',
+                            borderWidth: 2,
+                            borderDash: [6, 6],
+                            label: {
+                                content: 'Your $300k: Localize Product & Secure Lighthouse Clients',
+                                enabled: true,
+                                position: 'start',
+                                backgroundColor: 'rgba(229, 62, 62, 0.8)',
+                                font: {
+                                    weight: 'bold'
+                                },
+                                yAdjust: -15
+                            }
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    grid: { display: false },
+                    ticks: { font: { size: 14 } }
+                },
+                yRevenue: {
+                    type: 'linear',
+                    position: 'left',
+                    title: {
+                        display: true,
+                        text: 'Annual Revenue (USD)',
+                        font: { size: 16, weight: '600' }
+                    },
+                    ticks: {
+                        font: { size: 12 },
+                        callback: function(value) {
+                            return '$' + new Intl.NumberFormat('en-US', { notation: 'compact', compactDisplay: 'short' }).format(value);
+                        }
+                    }
+                },
+                yMargin: {
+                    type: 'linear',
+                    position: 'right',
+                    min: 0,
+                    max: 100,
+                    title: {
+                        display: true,
+                        text: 'Gross Margin (%)',
+                        font: { size: 16, weight: '600' }
+                    },
+                    ticks: {
+                        font: { size: 12 },
+                        callback: function(value) {
+                            return value + '%';
+                        }
+                    },
+                    grid: {
+                        display: false
+                    }
+                }
+            }
+        }
+    };
+
+    const growthChart = new Chart(
+        document.getElementById('growthChart'),
+        config
+    );
+</script>
+
+</body>
+</html>
